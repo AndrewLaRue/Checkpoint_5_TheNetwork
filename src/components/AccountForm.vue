@@ -1,7 +1,7 @@
 <template>
   <form class="account-form" @submit.prevent="handleSubmit">
     <div class="">
-      <span class="d-flex justify-content-around">
+      <span class="d-flex flex-column flex-md-row justify-content-around">
         <div class="col-md-5">
           <label for="name">Name:</label>
           <input type="text" class="form-control" v-model="editable.name" required name="name">
@@ -12,7 +12,7 @@
         </div>
       </span>
 
-      <span class="d-flex justify-content-around">
+      <span class="d-flex flex-column flex-md-row justify-content-around">
         <div class="col-md-5">
           <label for="picture">Picture:</label>
           <input type="url" class="form-control" v-model="editable.picture" required name="picture"
@@ -23,7 +23,7 @@
           <input type="url" class="form-control" v-model="editable.coverImg" required name="coverImg">
         </div>
       </span>
-      <span class="d-flex justify-content-around">
+      <span class="d-flex flex-column flex-md-row justify-content-around">
 
         <div class="col-md-5">
           <label for="name">GitHub:</label>
@@ -34,7 +34,7 @@
           <input type="text" class="form-control" v-model="editable.linkedin" required name="linkedin">
         </div>
       </span>
-      <span class="d-flex justify-content-around">
+      <span class="d-flex flex-column flex-md-row justify-content-around">
 
         <div class="col-md-5">
           <label for="name">Resume:</label>
@@ -53,7 +53,7 @@
           </div>
         </div>
       </span>
-      <span class=" d-flex flex-column justify-content-around">
+      <span class=" d-flex flex-column flex-md-row flex-column justify-content-around">
         <div class="col-12">
           <label for=" bio">Bio:</label>
           <textarea type="text" class="form-control" v-model="editable.bio" required name="bio" rows="8"

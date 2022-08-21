@@ -1,11 +1,13 @@
 <template>
-  <div class="post-card my-3">
+  <div class="post-card my-2">
     <div class="card">
       <div class="card-body d-flex align-items-center justify-content-between">
         <span class="d-flex fs-3 align-items-center">
           <router-link :to="{ name: 'Profile', params: { profileId: post.creator.id } }">
-            <img class="profile-img me-3 selectable" :src="post.creator.picture" alt="" :title="post.creator.name">
+            <img @click="scrollBehavior" class="profile-img me-3 selectable" :src="post.creator.picture" alt=""
+              :title="post.creator.name">
           </router-link>
+
 
         </span>
 
@@ -26,15 +28,18 @@
           </span>
         </div>
         <div class="text-dark">
-          <h6 class="selectable fs-3">👍{{ post.likes.length }}👎</h6>
+          <h6 @click="judgePost(post.id)" class="selectable fs-3" title="Likes">
+
+            {{ post.likes.length }}
+
+          </h6>
         </div>
       </div>
       <img class="img-fluid px-3" :src="post.imgUrl" alt="">
       <div class="card-body">
         <p class="card-text text-dark">{{ post.body }}</p>
         <div v-if="account.id == post.creator.id" class="text-end">
-          <i @click="deletePost" class="mdi mdi-delete text-danger me-3 selectable" title="Delete Post"></i>
-          <i class="mdi mdi-pen text-info selectable" title="Edit Post"></i>
+          <i @click="deletePost(post.id)" class="mdi mdi-delete text-danger me-3 selectable" title="Delete Post"></i>
         </div>
       </div>
 
@@ -45,8 +50,6 @@
 
 
 <script>
-// import { Post } from '../models/Post.js';
-
 import { computed } from '@vue/reactivity';
 import { AppState } from '../AppState.js';
 import { postsService } from '../services/PostsService.js';
@@ -62,9 +65,11 @@ export default {
     return {
       account: computed(() => AppState.account),
       profile: computed(() => AppState.activeProfile),
-      // post: computed(() => AppState.activePost),
 
-      // TODO finish and debug the deletes
+      scrollBehavior() {
+        window.scrollTo(0, 0);
+      },
+
       async deletePost(postId) {
         try {
           const yes = await Pop.confirm('Delete the post?')
@@ -73,6 +78,19 @@ export default {
         } catch (error) {
           logger.error('[Deleting Post]', error)
           Pop.error(error)
+        }
+      },
+
+      async judgePost(postId) {
+        try {
+          if (!this.account.id) {
+            Pop.toast('Log in first!')
+            return
+          }
+          await postsService.judgePost(postId)
+        } catch (error) {
+          logger.error('[judge post]', error)
+          Pop.toast(error.message, 'error')
         }
       }
     }

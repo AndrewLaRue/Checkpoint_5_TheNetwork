@@ -1,20 +1,20 @@
 <template>
-  <header class="container-fluid">
-    <div class="row bg-dark">
-      <div class="col-md-8 offset-md-2 fixed-top">
+  <header class="container-fluid fixed-top">
+    <div class="row">
+      <div class="col-12 col-md-8 offset-md-2">
         <Navbar />
       </div>
     </div>
   </header>
   <main class="container-fluid">
-    <section class="row">
-      <div class="col-md-2 bg-dark left-bar">
+    <section class="row bg-dark">
+      <div class="col-12 col-md-2 bg-dark left-bar sticky-md-top ">
         <Login />
       </div>
-      <div class="col-md-8 offset-md-2 view-port bg-dark">
+      <div class="col-12 col-md-8 view-port bg-dark">
         <router-view />
       </div>
-      <div class="col-md-2 offset-md-10 bg-dark right-bar">
+      <div class="col-12 col-md-2 sticky-md-top d-flex flex-column align-items-center bg-dark right-bar">
         <!--TODO look into why this didn't work the same as posts in the above div -->
         <AdCard v-for="a in ads" :key="a.id" :ad="a" />
       </div>
@@ -71,18 +71,19 @@ main {
 }
 
 .left-bar {
-  position: fixed;
-  padding-top: 15vh;
-  height: 100vh;
+  height: fit-content;
+  // position: fixed;
+  padding-top: 12vh;
+
 }
 
 .right-bar {
-  position: fixed;
+  // position: fixed;
   height: 100vh;
 }
 
 .view-port {
   overflow-y: scroll;
-  padding-top: 10vh;
+  // padding-top: 10vh;
 }
 </style>

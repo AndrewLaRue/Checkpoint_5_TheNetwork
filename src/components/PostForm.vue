@@ -1,6 +1,6 @@
 <template>
-  <form class="post-form" @submit.prevent="handleSubmit">
-    <div class="d-flex card p-1">
+  <form class="post-form" @submit.prevent="createPost()">
+    <div class="d-flex card mt-md-5 p-1">
       <span class="p-1">
         <input class="form-control" type="text" placeholder="New Post..." v-model="editable.body" />
         <input class="form-control" type="url" placeholder="Image url..." v-model="editable.imgUrl" />
@@ -27,18 +27,14 @@ export default {
     })
     return {
       editable,
-      async handleSubmit() {
+      async createPost() {
         try {
-          if (editable.value.id) {
-            await postsService.editPost(editable.value)
-            Pop.success('Post Edited')
-          } else {
-            await postsService.createPost(editable.value)
-            Pop.success('Great Job... You created a post!!!')
-          }
+          await postsService.createPost(editable.value)
+          Pop.success('Great Job... You created a post!!!')
           editable.value = {}
+          await postsService.getPosts()
         } catch (error) {
-          logger.error('[Handle submit Post ]', error)
+          logger.error('[create Post ]', error)
           Pop.error(error)
         }
       }

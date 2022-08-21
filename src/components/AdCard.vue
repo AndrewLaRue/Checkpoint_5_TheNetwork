@@ -1,7 +1,7 @@
 <template>
-  <div class="ad-card">
+  <div class="ad-card bg-dark">
 
-    <img class="img-fluid mt-2" :src="ad.tall" :title="ad.title" alt="">
+    <img class="img-fluid mt-2 bg-dark rounded" :src="ad.tall" :title="ad.title" alt="">
 
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
 
 
 <style lang="scss" scoped>
-img {
+.ad-card {
   max-height: 48vh;
 }
 </style>

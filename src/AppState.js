@@ -18,11 +18,18 @@ export const AppState = reactive({
   
   /**@type {import('./models/Profile.js').Profile} */
   activeProfile: {},
+  
+  /**@type {import('./models/Profile.js').Profile} */
+  myProfile: {},
 
   /**@type {import('./models/Ad.js').Ad[]} */
   ads: [],
 
   newer: {},
 
-  older: {}
+  older: {},
+
+  newerPro: {},
+
+  olderPro: {}
 })
