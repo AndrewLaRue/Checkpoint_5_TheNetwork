@@ -1,11 +1,14 @@
 <template>
   <div class="home-page">
 
-    <div class="row justify-content-center">
-
+    <div class="row justify-content-center ">
+      <div class="col-12 col-md-4 offset-md-6 mt-5 mt-md-3 fixed-top">
+        <SearchForm />
+      </div>
       <div v-if="account.id" class="col-md-10 mt-md-5">
         <PostForm />
       </div>
+
       <div class="col-md-10" v-for="p in posts" :key="p.id">
         <PostCard :post="p" />
       </div>
@@ -39,7 +42,7 @@ export default {
         await postsService.getPosts();
       }
       catch (error) {
-        logger.error(error);
+        logger.error('[get posts]', error);
         Pop.toast(error.message, "error");
       }
     }
@@ -55,7 +58,7 @@ export default {
         getPosts();
       }
       catch (error) {
-        logger.error(error);
+        logger.error('[onMounted error]', error);
         Pop.toast(error.message, "error");
       }
 

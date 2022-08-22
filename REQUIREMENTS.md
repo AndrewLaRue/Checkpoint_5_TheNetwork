@@ -19,17 +19,8 @@
 
 <!-- #endregion  -->
 
-<!--#region debugging -->
+<!--TODO  debugging
 
-
-
-<!--#endregion  -->
-
-<!--#region Stretch Goals -->
-Likes have a popover showing the profiles who liked them
-[--]  If you have not already done so include both the Users and the Posts in the search results
-[--]  Use timeago.js or luxon.js to format the post time in the '2h' or '4d' format
-[--]  Home and Search Results pages can use filter to only show alumni or non-alumni (graduated)
-[--]  Once graded create your own ads to show off your own projects that can be clicked to link to those projects
-
-<!--#endregion  -->
+when you like a post it takes you back to page one and so does refreshing...
+maybe put an active page in the appstate to take care of that?
+-->

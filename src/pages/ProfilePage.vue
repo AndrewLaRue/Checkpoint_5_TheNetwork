@@ -15,12 +15,12 @@
       <a v-if="profile.resume" :href="profile.resume"> <i class="fs-1 selectable mdi mdi-passport"></i></a>
     </div>
 
-    <div class="col-8 col-md-4 order-md-3 text-end">
+    <div class="col-8 col-md-4 order-md-3 text-light text-end">
       <h5 v-if="profile.email"> {{ profile.email }}</h5>
     </div>
 
     <div class="col-12 col-md-4 order-md-1 text-center">
-      <h5 v-if="profile.class">
+      <h5 v-if="profile.class" class="text-light">
         <i data-bs-toggle="collapse" data-bs-target="#collapseBio"
           class="mdi mdi-chevron-double-down text-warning selectable" title="Bio"></i>
         {{ profile.class }}
@@ -48,12 +48,11 @@
       <PostCard :post="p" />
     </div>
     <div class="col-12 text-center pb-5 order-md-5">
-      <button class="btn btn-light me-5" :disabled="!previousProPage" title="Previous Page"> <i
-          class="mdi mdi-chevron-double-left" @click="changeProfilePage(previousProPage)"></i>
+      <button class="btn btn-light me-5" :disabled="!previousPage" title="Previous Page"> <i
+          class="mdi mdi-chevron-double-left" @click="changeProfilePage(previousPage)"></i>
       </button>
 
-      <button class="btn btn-light ms-5" :disabled="!nextProPage" title="Next Page"
-        @click="changeProfilePage(nextProPage)">
+      <button class="btn btn-light ms-5" :disabled="!nextPage" title="Next Page" @click="changeProfilePage(nextPage)">
         <i class="mdi mdi-chevron-double-right"></i> </button>
     </div>
   </div>
@@ -70,7 +69,7 @@ import { profilesService } from '../services/ProfilesService.js';
 import { postsService } from '../services/PostsService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
-// import PostForm from '../components/PostForm.vue';
+
 export default {
   setup() {
     const route = useRoute();
@@ -86,6 +85,7 @@ export default {
     }
     async function changeProfilePage(url) {
       try {
+        await postsService.getPostsByCreatorId(AppState.activeProfile.id)
         await postsService.changeProfilePage(url);
       } catch (error) { }
     }
@@ -109,8 +109,8 @@ export default {
       profile: computed(() => AppState.activeProfile),
       cover: computed(() => `url(${AppState.activeProfile?.coverImg || "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fed888f0-441a-4b50-84c6-33c1f8220017/d29tcyp-5ee4c144-a38a-4ac6-9f37-bd67c7485cd9.jpg/v1/fill/w_900,h_317,q_75,strp/illusion_of_mist_hellscape_by_nathanmarciniak_d29tcyp-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzE3IiwicGF0aCI6IlwvZlwvZmVkODg4ZjAtNDQxYS00YjUwLTg0YzYtMzNjMWY4MjIwMDE3XC9kMjl0Y3lwLTVlZTRjMTQ0LWEzOGEtNGFjNi05ZjM3LWJkNjdjNzQ4NWNkOS5qcGciLCJ3aWR0aCI6Ijw9OTAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.MLvLx5O7dIYWASCLr8-hNWjUKc3VQtz5bjjmnAD7HzU"})`),
       posts: computed(() => AppState.profilePosts),
-      nextProPage: computed(() => AppState.olderPro),
-      previousProPage: computed(() => AppState.newerPro)
+      nextPage: computed(() => AppState.older),
+      previousPage: computed(() => AppState.newer)
     };
   },
 

@@ -1,14 +1,13 @@
 <template>
-  <div class="ad-card bg-dark">
+  <div class="ad-card ">
 
-    <img class="img-fluid mt-2 bg-dark rounded" :src="ad.tall" :title="ad.title" alt="">
+    <img class="img-fluid my-2  rounded" :src="ad.tall" :title="ad.title" alt="">
 
   </div>
 </template>
 
 
 <script>
-// import { Ad } from '../models/Ad.js';
 
 export default {
 
@@ -24,6 +23,6 @@ export default {
 
 <style lang="scss" scoped>
 .ad-card {
-  max-height: 48vh;
+  max-height: 100vh;
 }
 </style>

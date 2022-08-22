@@ -29,7 +29,6 @@ export const AppState = reactive({
 
   older: {},
 
-  newerPro: {},
+  toggle: false,
 
-  olderPro: {}
 })
