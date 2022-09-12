@@ -67,7 +67,7 @@ main {
 }
 
 .left-bar {
-  height: fit-content;
+  height: 100vh;
   padding-top: 12vh;
 }
 
