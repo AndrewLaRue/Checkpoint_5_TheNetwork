@@ -94,6 +94,7 @@ class PostsService{
   async judgePost(postId) {
     await api.post(`api/posts/${postId}/like`)
     if (!AppState.toggle) {
+      // splice here rather then get everything
       this.getPosts()
     } else {
       this.getPostsByCreatorId(AppState.activeProfile.id)
